@@ -1,3 +1,4 @@
+let keyList = getKeyList()
 let keys = {}
 let letterElements = []
 let canva = document.querySelector('.canva')
@@ -232,7 +233,6 @@ function endGame(isWin) {
  * Function that setup and start game
  */
 function startGame() {
-    const keyList = getKeyList()
     keys = {}
     buildKeyArray(keyList)
     const word = setupWord("testons")
@@ -241,9 +241,43 @@ function startGame() {
     addKeyPressListner(keyList, word)
 }
 
+function resetGlobalVariables() {
+    keys = {}
+    letterElements = []
+    canva = document.querySelector('.canva')
+    numberOfRemainingLetters
+    numberOfBadKeyPressed = 0
+}
+
+function resetWord() {
+    const wordElement = document.querySelector('.word')
+    const letterElement = Array.from(wordElement.children)
+    letterElement.forEach(element => {
+        element.remove()
+    })
+}
+
+function resetCanva() {
+    const context = canva.getContext('2d');
+    context.clearRect(0, 0, canva.width, canva.height);
+}
+
+function resetKeyboard() {
+    keyList.forEach(key => {
+        key.classList.remove("badKey")
+        key.classList.remove("goodKey")
+    })
+}
+
 window.onload = () => {
     startGame()
     document.querySelector("button.reload").addEventListener("click", () => {
+
+        resetCanva()
+        resetWord()
+        resetKeyboard()
+        resetGlobalVariables()
+
         startGame()
     })
 }
