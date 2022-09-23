@@ -241,6 +241,7 @@ function startGame() {
     addKeyPressListner(keyList, word)
 }
 
+/** Reset global variables */
 function resetGlobalVariables() {
     keys = {}
     letterElements = []
@@ -249,6 +250,7 @@ function resetGlobalVariables() {
     numberOfBadKeyPressed = 0
 }
 
+/** Reset html element associate to the world to find */
 function resetWord() {
     const wordElement = document.querySelector('.word')
     const letterElement = Array.from(wordElement.children)
@@ -257,11 +259,13 @@ function resetWord() {
     })
 }
 
+/** Reset canva */
 function resetCanva() {
     const context = canva.getContext('2d');
     context.clearRect(0, 0, canva.width, canva.height);
 }
 
+/** Reset keyboard */
 function resetKeyboard() {
     keyList.forEach(key => {
         key.classList.remove("badKey")
